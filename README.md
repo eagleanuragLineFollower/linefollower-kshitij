@@ -7,7 +7,7 @@ Battery: Li-ion 9v input
 Voltage regulator:Buck Boost 9v to 7v
 Motor driver: Pololu DRV 
 Microcontroller: Arduino Mega ADK.
-Size: 10cm*6cm*6cm
+Size: 10cmx6cmx6cm
 
 Our robot is a completely self made double decker model. The body is of a two wheel - castor wheel type with its base made of Hardwood material. We followed a modular approach for both hardware and software for ease of debugging and quick replacement of parts. 
 The sensory system has a total of 8 IR sensors :
@@ -22,5 +22,7 @@ Lastly for testing our algorithms, we made a graphical python application. To us
 We use a dfs - dijkstra approach to our algorithm so that it remains generic and isn't tied to any specific problem statement.
 
 
-![Cerificate Linefollower](https://raw.githubusercontent.com/s-ankur/linefollower-kshitij/master/IMG-20180121-WA0002.jpg)
+![Robot](rob.jpg )
+
+![Cerificate Linefollower](IMG-20180121-WA0002.jpg )
 
