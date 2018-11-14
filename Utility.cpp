@@ -1,16 +1,5 @@
 #ifdef GRAPH
 
-template <typename T>
-void reverse_array(T* arr, int n)
-{
-    for (int i = 0; i < n / 2; i++)
-    {
-        T tmp;
-        tmp = arr[i];
-        arr[i] = arr[n - 1 - i];
-        arr[n - i - 1] = tmp;
-    }
-}
 #define INT_MAX 10000
 
 int closest_node(int dist[], bool visited[], int node_n)
