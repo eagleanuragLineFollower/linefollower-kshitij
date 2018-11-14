@@ -76,7 +76,7 @@ FAILURE:
   next_state=Dijkstra;
 SUCCESS:
   current_node = path[path_n++];
-  reverse_array(path_trace, path_trace_n);
+  std::reverse(path_trace,path_trace + path_trace_n);
   
 }
 
