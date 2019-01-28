@@ -1,8 +1,6 @@
 /*
   #####~~~~ LETS FOLLOW ~~~~#####
-  Bot can be set to any mode
-  PLEASE WORK ON THIS VERSION ONLY
-  Upoad HMC5883L library to Libs on Drive Please
+  USes HMC5883L library
   $$$COMPILE TIME MAGIC$$$
 */
 #include <QTRSensors.h>
@@ -22,10 +20,13 @@ QTRSensorsRC qtrrc((unsigned char[]) {
   A0, A1, A2, A3, A4, A5
 }, NUM_SENSORS, TIMEOUT, EMITTER_PIN);
 
+// Random numbers required in some algorithms
 unsigned long get_random()
 {
   return millis();
 }
+
+// Turn Left
 void leftturn()
 {
   //DEBUG("left");DEBUG("\n");
@@ -34,6 +35,7 @@ void leftturn()
   delay(TURN_DELAY);
 }
 
+// Turn Right
 void rightturn()
 {
   //DEBUG("Right");DEBUG("\n");
@@ -42,8 +44,7 @@ void rightturn()
   delay(TURN_DELAY);
 }
 
-
-
+// Make a U Turn
 void uturn()
 {
   //DEBUG("uturn"); DEBUG("\n");
@@ -51,11 +52,13 @@ void uturn()
   driver.motorAReverse(90);
 }
 
+// Glow an led on the bot. Can tur it on or off
 void Bot:: glow (bool x)
 {
   digitalWrite(13, x?HIGH:LOW);
 }
 
+// Read the sensor value on the bot corresponding to position x
 bool Bot :: Sensor(int x)
 {
   if (x == 0)return I digitalRead(2);
@@ -64,12 +67,13 @@ bool Bot :: Sensor(int x)
   return I (sensors[x - 1] < 400);
 }
 
+// Check input of a button on the bot
 bool Bot:: get_button()
 {
-  ;
   return digitalRead(BUTTON);
 }
 
+// Read Sensor Values and adjust found accordingly
 void Bot:: read_sensors()
 {
   // DEBUG("ReadSensor");DEBUG("\n")
@@ -77,10 +81,10 @@ void Bot:: read_sensors()
   AutoQTR
   (
     for (int i = 0; i < 8; i++)
-{
-  DEBUG(Sensor(i)); DEBUG('\t');
-  }
-  ENDL;
+    {
+      DEBUG(Sensor(i)); DEBUG('\t');
+    }
+    ENDL;
   )
   found[Right] = Sensor(0) && Sensor(1) ;
   found[Left] = Sensor(7) && Sensor(6);
@@ -93,7 +97,7 @@ bool Bot::has_forward()
   long current_time = 0;
   bool r;
   bool r_pre = 1;
-unsigned long goal_time=millis();
+  unsigned long goal_time=millis();
   //attachInterrupt(digitalPinToInterrupt(ENCODER), encoder, RISING);
   forward();
   while (found[Left] || found[Right])
@@ -121,7 +125,6 @@ unsigned long goal_time=millis();
   {
     x = x | Sensor(h);
   }
-
   return x;
 }
 
@@ -144,12 +147,6 @@ bool Bot:: has_node()
     read_sensors();
     ways[Left] = found[Left] || ways[Left];
     ways[Forward] = has_forward();
-    //    driver.motorAReverse(255);
-    //    driver.motorBReverse(255);
-    //    delay(50);
-    //    driver.motorBStop();
-    //    driver.motorAStop();
-    //    delay(5000);
     return true;
   }
   if (!Sensor(0) && !Sensor(1) && !Sensor(2) && !Sensor(3) && !Sensor(4) && !Sensor(5) && !Sensor(6) && !Sensor(7))
@@ -229,12 +226,6 @@ void Bot::follow_segment()
       break;
   }
   DEBUG(pos[0]); DEBUG(" "); DEBUG(pos[1]); DEBUG("\n");
-
-  //    while(Serial.read()==-1){}
-  //  delay(5000);
-  //    Serial.println("aaya");
-
-
 }
 
 
@@ -400,14 +391,13 @@ void forward()
   //DEBUG("Forward");DEBUG("\n");
   driver.motorBStop();
   driver.motorAStop();
-
-  if (bot.pot_units/50<=16 ){
+  if (bot.pot_units/50<=16 )
+  {
     driver.motorAForward(40);
     driver.motorBForward(40);
-    
   }
 }
+
 void query()
 {
-
 }
